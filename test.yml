@@ -1,0 +1,11 @@
+name: Steve 
+age: 99 
+address: "has a colon :in it so it needs quotes"
+active: true 
+key:
+  key: value
+  key2: value2
+  key3: 
+    key:value
+    key2:value02 
+jsonStyleFormat: {key: value, key2: 33, key3: {key: value, key2: value02}}
