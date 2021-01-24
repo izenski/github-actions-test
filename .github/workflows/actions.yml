@@ -1,6 +1,8 @@
 name: Actions Workflow
 
 on: 
+  repository_dispatch: #can be triggered manually - send post to URL
+    types: [build-whatever]
   # schedule: 
   #   - cron: "0/5 * * * *"
   #   - cron: "0/6 * * * *"
