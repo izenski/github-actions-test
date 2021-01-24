@@ -1,8 +1,24 @@
 name: Actions Workflow
 
 on: 
-  repository_dispatch: #can be triggered manually - send post to URL
-    types: [build-whatever]
+  push: 
+    branches: 
+      - master
+      #matches anything that starts with feature/ and has no additional slashes
+      - 'feature/*' 
+      # matches any number of slashes
+      - 'releases/**'
+      # ignore a branch 
+      - '!releases/001'  
+    # tags:
+    #   - va.*
+    # can also use paths 
+    # paths:
+      # - '**.js' 
+      # - '!notthisone.js'  
+      # - 'docs/**'   
+  # repository_dispatch: #can be triggered manually - send post to URL
+  #   types: [build-whatever]
   # schedule: 
   #   - cron: "0/5 * * * *"
   #   - cron: "0/6 * * * *"
