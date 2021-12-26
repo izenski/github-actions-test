@@ -12,6 +12,7 @@ array:
   - item1
   - item2
   - { key: value}
+jsonArray: [item1, item2]
 objectArray:
   - key: value
     key2: value3
