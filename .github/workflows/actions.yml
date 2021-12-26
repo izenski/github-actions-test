@@ -37,13 +37,22 @@ jobs:
         run: |
           pwd
           ls -a
-          echo $GITHUB_SHA 
+          echo "the commit that started this workflow:"
+          echo $GITHUB_SHA
+          echo "the repository this is running for:"
           echo $GITHUB_REPOSITORY 
+          echo "the GH workspace:"
           echo $GITHUB_WORKSPACE
+          echo "github token:"
           echo "${{github.token}}"
+        # just an example: not right way to do this
+        #git clone git@github:$GITHUB_REPOSITORY 
+        #git checkout $GITHUB_SHA
       - name: Checkout 
+      # check out the current repo to the VM running the tasks      
         uses: actions/checkout@v1
       - name: List Files After Checkout
+      # should see all the files are loaded onto the VM now
         run: |
           pwd
           ls -a
