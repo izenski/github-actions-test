@@ -3,36 +3,45 @@ name: Actions Workflow
 on: 
   push: 
     branches: 
-      - master
+      - main
       #matches anything that starts with feature/ and has no additional slashes
       - 'feature/*' 
       # matches any number of slashes
       - 'releases/**'
       # ignore a branch 
       - '!releases/001'  
+    # branches-ignore: - can't have both branches & branches-ignore      
     # tags:
-    #   - va.*
+    #   - v1.*
     # can also use paths 
     # paths:
       # - '**.js' 
       # - '!notthisone.js'  
       # - 'docs/**'   
+    # can use paths-ignore, but not both paths &amp; paths-ignore
+
+  # https://docs.github.com/en/rest/reference/repos#create-a-repository-dispatch-event
   # repository_dispatch: #can be triggered manually - send post to URL
-  #   types: [build-whatever]
+  #   types: [build-or-whatever]
+
+  # https://crontab.guru/examples.html
   # schedule: 
-  #   - cron: "0/5 * * * *"
-  #   - cron: "0/6 * * * *"
-  # push:
+  #   - cron: "0/5 * * * *" # starting at 0 run every 15 minutes
+  #   - cron: "0/6 * * * *"  #you can have multiple schedules running
+  #   - cron: "minutes hours day-of-month month day-of-week - asterisk means "any"
+
+  # by default pull_request only triggers on open, reopen, and synchronize
   pull_request: 
-    types: [closed, assigned, 
-    opened, reopened]
+    types: [closed, assigned, opened, reopened]
 
 jobs: 
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
       - name: read payload
-        run: echo ${{ github.event.client_payload.env}}
+        run: |
+          echo "client_payload if called via API: "
+          echo ${{ github.event.client_payload.env}}
       - name: List Files 
         run: |
           pwd
