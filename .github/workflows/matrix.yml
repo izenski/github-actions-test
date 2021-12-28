@@ -1,5 +1,5 @@
 name: Matrix
-on: push
+on: pull_request
 jobs:
   node-version:
     strategy:
@@ -14,9 +14,12 @@ jobs:
         include:
           - os: ubuntu-latest
             node_version: 16
+            is_ubuntu_16: "true"  
       fail-fast: true
       max-parallel: 3  #0 default
     runs-on: ${{ matrix.os }}
+    env:
+      is_ubuntu_16: ${{ matrix.is_ubuntu_8 }}
     steps:
       - uses: actions/setup-node@v2
         with: 
