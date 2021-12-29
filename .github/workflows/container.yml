@@ -12,6 +12,25 @@ jobs:
   #       run: |
   #         node -v
   #         cat /etc/os-release
+  docker-steps:
+    runs-on: ubuntu-latest 
+    container: 
+      image: node:lts
+    steps:
+      - name: log node version 
+        run: node -v
+      - name: Step with its own docker container
+        uses: docker://node:17 
+        # override entrypoint
+        with: 
+          entrypoint: '/bin/echo'
+          args: 'Hello World'
+      - name: Log node version in docker container
+        uses: docker://node:17 
+        # override entrypoint
+        with: 
+          entrypoint: '/usr/local/bin/node'
+          args: '-v'
   node-docker:
     runs-on: ubuntu-latest
     services:
