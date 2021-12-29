@@ -32,6 +32,10 @@ jobs:
           entrypoint: '/usr/local/bin/node'
           args: '-v'
       - uses: actions/checkout@v1
+      - name: Grant access to script.sh 
+        uses: docker://node:alpine3.14 
+        with: 
+          entrypoint: 'chmod +x script.sh'
       - name: Run a script in a docker container
         uses: docker://node:alpine3.14 
         # override entrypoint
