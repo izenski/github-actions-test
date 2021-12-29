@@ -31,7 +31,7 @@ jobs:
         with: 
           entrypoint: '/usr/local/bin/node'
           args: '-v'
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - name: Run a script in a docker container
         uses: docker://node:alpine3.14 
         # override entrypoint
