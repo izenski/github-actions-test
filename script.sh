@@ -1,5 +1,3 @@
 #!/bin/sh
-
 echo $1 $2
-echo "Hello World from bash"
-
+echo "Hello World"

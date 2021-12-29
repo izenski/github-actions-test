@@ -1,7 +1,7 @@
-name: Container
-on: push 
+# name: Container
+# on: push 
 
-jobs:
+# jobs:
   # node-docker:
   #   runs-on: ubuntu-latest
   #   container: 
@@ -12,51 +12,51 @@ jobs:
   #       run: |
   #         node -v
   #         cat /etc/os-release
-  docker-steps:
-    runs-on: ubuntu-latest 
-    container: 
-      image: node:lts
-    steps:
-      - name: log node version 
-        run: node -v
-      - name: Step with its own docker container
-        uses: docker://node:17 
-        # override entrypoint
-        with: 
-          entrypoint: '/bin/echo'
-          args: 'Hello World'
-      - name: Log node version in docker container
-        uses: docker://node:17 
-        # override entrypoint
-        with: 
-          entrypoint: '/usr/local/bin/node'
-          args: '-v'
-      - uses: actions/checkout@v1
-      - name: Grant access to script.sh 
-        uses: docker://node:alpine3.14 
-        with: 
-          entrypoint: 'chmod +x script.sh'
-      - name: Run a script in a docker container
-        uses: docker://node:alpine3.14 
-        # override entrypoint
-        with: 
-          entrypoint: ./script.sh
-          args: "some string"
-  node-docker:
-    runs-on: ubuntu-latest
-    services:
-      app:
-        image: alialaa17/node-api
-        ports:
-          - 3001:3000
-      mongo:
-        image: mongo
-        ports:
-          - "27017:27017"
-    steps:
-      # you can specify a container at the step level
-      - name: Post a user
-        run: 'curl -X POST http://localhost:3001/api/user -H ''Content-Type: application/json'' -d ''{"username": "hello","address": "dwded"}'''
-      - name: Get Users
-        run: curl http://localhost:3001/api/users
+  # docker-steps:
+  #   runs-on: ubuntu-latest 
+  #   container: 
+  #     image: node:lts
+  #   steps:
+  #     - name: log node version 
+  #       run: node -v
+  #     - name: Step with its own docker container
+  #       uses: docker://node:17 
+  #       # override entrypoint
+  #       with: 
+  #         entrypoint: '/bin/echo'
+  #         args: 'Hello World'
+  #     - name: Log node version in docker container
+  #       uses: docker://node:17 
+  #       # override entrypoint
+  #       with: 
+  #         entrypoint: '/usr/local/bin/node'
+  #         args: '-v'
+  #     - uses: actions/checkout@v1
+  #     - name: Grant access to script.sh 
+  #       uses: docker://node:alpine3.14 
+  #       with: 
+  #         entrypoint: 'chmod +x script.sh'
+  #     - name: Run a script in a docker container
+  #       uses: docker://node:alpine3.14 
+  #       # override entrypoint
+  #       with: 
+  #         entrypoint: ./script.sh
+  #         args: "some string"
+  # node-docker:
+    # runs-on: ubuntu-latest
+    # services:
+    #   app:
+    #     image: alialaa17/node-api
+    #     ports:
+    #       - 3001:3000
+    #   mongo:
+    #     image: mongo
+    #     ports:
+    #       - "27017:27017"
+    # steps:
+    #   # you can specify a container at the step level
+    #   - name: Post a user
+    #     run: 'curl -X POST http://localhost:3001/api/user -H ''Content-Type: application/json'' -d ''{"username": "hello","address": "dwded"}'''
+    #   - name: Get Users
+    #     run: curl http://localhost:3001/api/users
 
