@@ -1,7 +1,7 @@
-# name: Container
-# on: push 
+name: Container
+on: push 
 
-# jobs:
+jobs:
   # node-docker:
   #   runs-on: ubuntu-latest
   #   container: 
@@ -12,36 +12,29 @@
   #       run: |
   #         node -v
   #         cat /etc/os-release
-  # docker-steps:
-  #   runs-on: ubuntu-latest 
-  #   container: 
-  #     image: node:lts
-  #   steps:
-  #     - name: log node version 
-  #       run: node -v
-  #     - name: Step with its own docker container
-  #       uses: docker://node:17 
-  #       # override entrypoint
-  #       with: 
-  #         entrypoint: '/bin/echo'
-  #         args: 'Hello World'
-  #     - name: Log node version in docker container
-  #       uses: docker://node:17 
-  #       # override entrypoint
-  #       with: 
-  #         entrypoint: '/usr/local/bin/node'
-  #         args: '-v'
-  #     - uses: actions/checkout@v1
-  #     - name: Grant access to script.sh 
-  #       uses: docker://node:alpine3.14 
-  #       with: 
-  #         entrypoint: 'chmod +x script.sh'
-  #     - name: Run a script in a docker container
-  #       uses: docker://node:alpine3.14 
-  #       # override entrypoint
-  #       with: 
-  #         entrypoint: ./script.sh
-  #         args: "some string"
+  docker-steps:
+    runs-on: ubuntu-latest 
+    container: 
+      image: node:10.18.0-jessie
+    steps:
+      - name: log node version 
+        run: node -v
+      - name: Step with its own docker container
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          entrypoint: '/bin/echo'
+          args: 'Hello World'
+      - name: Log node version in docker container
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          entrypoint: '/usr/local/bin/node'
+          args: '-v'
+      - uses: actions/checkout@v1
+      - name: Run a script in a docker container
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          entrypoint: ./script.sh
+          args: "Some string"
   # node-docker:
     # runs-on: ubuntu-latest
     # services:
