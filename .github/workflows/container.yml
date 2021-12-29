@@ -33,7 +33,7 @@ jobs:
           args: '-v'
       - uses: actions/checkout@v2
       - name: Run a script in a docker container
-        uses: docker://node:alphine3.14 
+        uses: docker://node:alpine3.14 
         # override entrypoint
         with: 
           entrypoint: ./script.sh
